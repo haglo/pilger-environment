@@ -21,7 +21,7 @@ services:
     ports:
     - "5432:5432"
     networks:
-    - postgres
+    - database
     volumes:
     - pilger_postgres:/var/lib/postgresql/data
     - ./postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
@@ -39,14 +39,14 @@ services:
     ports:
     - 8080:8080
     networks:
-    - postgres
+    - database
     - proxy
     depends_on:
     - postgres
 
 networks:
-  postgres:
-    name: pilger-postgres
+  database:
+    name: pilger-database
     driver: bridge
   proxy:
     name: pilger-proxy
