@@ -1,6 +1,14 @@
 version: '3.7'
 
 services:
+  openidc-auth-proxy:
+    build: ./openidc-auth-proxy
+    container_name: pilger_proxy
+    restart: always
+    ports:
+    - "80:80"
+    networks:
+    - proxy 
   postgres:
     image: postgres:10.4
     container_name: pilger_postgres
@@ -27,15 +35,19 @@ services:
       KEYCLOAK_PASSWORD: 123atgfd
     ports:
     - 8080:8080
+    networks:
+    - postgres
+    - proxy
     depends_on:
     - postgres
-
 
 networks:
   postgres:
     name: pilger-postgres
     driver: bridge
-
+  proxy:
+    name: pilger-proxy
+    driver: bridge
 
 volumes:
   pilger_postgres:
