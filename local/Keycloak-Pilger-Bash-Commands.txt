@@ -26,6 +26,7 @@ kcadm.sh set-password --target-realm pilger --username haglo --new-password 123a
 # We can only use the username if it is unique, else use --uid
 kcadm.sh add-roles --target-realm pilger --uusername haglo --rolename POWER_USER;
 
+http://localhost:8080/auth/realms/pilger/.well-known/openid-configuration
 
 curl -s -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "username=haglo&grant_type=password&client_id=pilgerApp&password=123atgfd" http://localhost:8080/auth/realms/pilger/protocol/openid-connect/token;
 
